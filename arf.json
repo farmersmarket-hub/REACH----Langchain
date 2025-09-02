@@ -1,0 +1,631 @@
+{
+  "name": "The PMDS Market System",
+  "group": "PGL",
+  "type": "folder",
+  "description": "Top-level node representing the PMDS Market System.",
+  "children": [
+    {
+      "name": "System Users",
+      "group": "PGL",
+      "type": "folder",
+      "description": "Defines various users interacting with PMDS.",
+      "children": [
+        {
+          "name": "Market Manager (PGL)",
+          "group": "PGL",
+          "type": "folder",
+          "description": "Individuals involved in managing the market operations under PGL.",
+          "children": [
+            {
+              "name": "PGL staff",
+              "group": "PGL",
+              "type": "user",
+              "description": "Core staff members managing daily tasks and logistics."
+            },
+            {
+              "name": "PGL volunteers",
+              "group": "PGL",
+              "type": "user",
+              "description": "Volunteers assisting in various operational roles at the market."
+            },
+            {
+              "name": "PGL leadership (Germaine and Brittany)",
+              "group": "PGL",
+              "type": "user",
+              "description": "Senior leaders providing oversight and strategic direction."
+            }
+          ]
+        },
+        {
+          "name": "Market Vendors (all)",
+          "group": "Vendors",
+          "type": "folder",
+          "description": "All vendors who participate and sell goods/services at the market.",
+          "children": [
+            {
+              "name": "Farmers",
+              "group": "Vendors",
+              "type": "user",
+              "description": "Vendors who grow and sell fresh produce."
+            },
+            {
+              "name": "Value-added producers",
+              "group": "Vendors",
+              "type": "user",
+              "description": "Vendors offering processed or packaged agricultural goods."
+            },
+            {
+              "name": "Hot food vendors",
+              "group": "Vendors",
+              "type": "user",
+              "description": "Vendors selling prepared and ready-to-eat meals."
+            },
+            {
+              "name": "Educators",
+              "group": "Vendors",
+              "type": "user",
+              "description": "Individuals or groups providing educational content at the market."
+            },
+            {
+              "name": "Entertainers",
+              "group": "Vendors",
+              "type": "user",
+              "description": "Artists and performers contributing to the market’s atmosphere."
+            }
+          ]
+        },
+        {
+          "name": "Market Funders",
+          "group": "Funders",
+          "type": "folder",
+          "description": "Entities providing financial and strategic support for the market.",
+          "children": [
+            {
+              "name": "REACH",
+              "group": "Funders",
+              "type": "user",
+              "description": "Funds initiatives related to health equity and food access."
+            },
+            {
+              "name": "Wallace Clinic",
+              "group": "Funders",
+              "type": "user",
+              "description": "Supports health and community wellness through funding."
+            },
+            {
+              "name": "Outgrowing Hunger/Oregon Food Bank",
+              "group": "Funders",
+              "type": "user",
+              "description": "Provides resources and funding to address food insecurity."
+            },
+            {
+              "name": "Oregon Department of Agriculture",
+              "group": "Funders",
+              "type": "user",
+              "description": "Supports agricultural development and regulatory oversight."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "System Components",
+      "group": "PGL",
+      "type": "folder",
+      "description": "Breakdown of major technical and operational components of PMDS.",
+      "children": [
+        {
+          "name": "Data input forms",
+          "group": "PGL",
+          "type": "component",
+          "description": "Forms used to collect, submit, and manage data from vendors, managers, and attendees."
+        },
+        {
+          "name": "Database",
+          "group": "PGL",
+          "type": "component",
+          "description": "Centralized repository where all market-related data (users, vendors, transactions) is stored and retrieved."
+        },
+        {
+          "name": "Unique IDs",
+          "group": "PGL",
+          "type": "component",
+          "description": "ID system (e.g., Vendor ID, Neighbor ID) used for linking data entries to specific stakeholders."
+        },
+        {
+          "name": "Mobile Wallet",
+          "group": "PGL",
+          "type": "feature",
+          "description": "A digital solution that facilitates benefit tracking and transactions at the market.",
+          "children": [
+            {
+              "name": "For all market attendees",
+              "group": "PGL",
+              "type": "category",
+              "description": "Mobile Wallet is accessible to all individuals attending the market.",
+              "children": [
+                {
+                  "name": "New Attendees to the Market",
+                  "group": "PGL",
+                  "type": "user-category",
+                  "description": "Attendees who are participating in the market for the first time."
+                },
+                {
+                  "name": "Return Attendees to the Market",
+                  "group": "PGL",
+                  "type": "user-category",
+                  "description": "Individuals who have previously attended the market."
+                },
+                {
+                  "name": "Unregistered attendees",
+                  "group": "PGL",
+                  "type": "user-category",
+                  "description": "Attendees who have not formally registered through the system."
+                }
+              ]
+            },
+            {
+              "name": "Tracks balances of all benefits by attendee family (Neighbor ID):",
+              "group": "PGL",
+              "type": "category",
+              "description": "Allows tracking of different benefit balances linked to family Neighbor ID.",
+              "children": [
+                {
+                  "name": "SNAP Bucks",
+                  "group": "PGL",
+                  "type": "benefit",
+                  "description": "Manually loaded for SNAP recipients who present their SNAP card and determine how much they want to spend; determines token allocation."
+                },
+                {
+                  "name": "Wallace Bucks",
+                  "group": "PGL",
+                  "type": "benefit",
+                  "description": "Autoloaded ($25) for designated Wallace clients."
+                },
+                {
+                  "name": "Community Bucks",
+                  "group": "PGL",
+                  "type": "benefit",
+                  "description": "Manually loaded for first 200 people to attend the market and receive the physical bucks while in line at the registration table."
+                },
+                {
+                  "name": "PGL Bucks",
+                  "group": "PGL",
+                  "type": "benefit",
+                  "description": "Manually loaded for those who bring physical PGL Bucks to the Market."
+                }
+              ]
+            },
+            {
+              "name": "Enables transactions with all vendors",
+              "group": "PGL",
+              "type": "category",
+              "description": "Supports various types of financial exchanges between attendees and vendors.",
+              "children": [
+                {
+                  "name": "Benefits based transactions",
+                  "group": "PGL",
+                  "type": "transaction",
+                  "description": "Transactions completed using market benefits such as SNAP, Wallace, or Community Bucks."
+                },
+                {
+                  "name": "Non-benefits based transactions (cash and/or card only)",
+                  "group": "PGL",
+                  "type": "transaction",
+                  "description": "Transactions conducted using cash, credit, or debit cards outside the benefit system."
+                },
+                {
+                  "name": "Benefits and Non-benefits based transactions combined",
+                  "group": "PGL",
+                  "type": "transaction",
+                  "description": "Transactions involving both benefit tokens and cash/card payments together."
+                }
+              ]
+            },
+            {
+              "name": "Invoicing and remittance",
+              "group": "PGL",
+              "type": "component",
+              "description": "Automates vendor payment tracking and enables funder invoicing tied to benefit usage."
+            }
+          ]
+        },
+        {
+          "name": "Dashboards",
+          "group": "PGL",
+          "type": "folder",
+          "description": "Visual analytics and report interfaces for various user groups.",
+          "children": [
+            {
+              "name": "Shared Dashboard Set",
+              "group": "PGL",
+              "type": "folder",
+              "description": "Dashboards shared across users for general reporting and status overview.",
+              "children": [
+                {
+                  "name": "Benefit Utilization Dashboard",
+                  "group": "PGL",
+                  "type": "dashboard",
+                  "description": "Displays data on how benefits such as SNAP are being utilized across the market."
+                },
+                {
+                  "name": "Market Attendance Dashboard",
+                  "group": "PGL",
+                  "type": "dashboard",
+                  "description": "Visualizes attendance patterns of various market participants over time."
+                },
+                {
+                  "name": "General Dashboard",
+                  "group": "PGL",
+                  "type": "dashboard",
+                  "description": "A summary view with key metrics for overall market performance."
+                },
+                {
+                  "name": "Invoice and Remittance Dashboard",
+                  "group": "PGL",
+                  "type": "dashboard",
+                  "description": "Tracks invoices submitted and payments made to vendors and funders."
+                },
+                {
+                  "name": "Market Sales Dashboard",
+                  "group": "PGL",
+                  "type": "dashboard",
+                  "description": "Breaks down sales figures by vendor, product type, and payment method."
+                },
+                {
+                  "name": "Vendor Information Dashboard",
+                  "group": "PGL",
+                  "type": "dashboard",
+                  "description": "Displays contact, participation, and history information for vendors."
+                }
+              ]
+            },
+            
+            {
+              "name": "Contract Dashboard Set\n(forthcoming)",
+              "group": "PGL",
+              "type": "folder",
+              "description": "Dashboards specific to contract performance and metrics reporting.",
+              "children": [
+                {
+                  "name": "Funder Invoice and Remittance Dashboard",
+                  "group": "Funders",
+                  "type": "dashboard",
+                  "description": "Tracks funder-specific invoicing and remittance activities."
+                },
+                {
+                  "name": "REACH-PGL Contract Dashboard",
+                  "group": "Funders",
+                  "type": "dashboard",
+                  "description": "Monitors contract milestones, deliverables, and metrics for REACH and PGL."
+                },
+                {
+                  "name": "CSA Dashboard",
+                  "group": "PGL",
+                  "type": "dashboard",
+                  "description": "Tracks participation and distribution metrics for the Community Supported Agriculture program."
+                }
+              ]
+            }
+            ,
+            {
+              "name": "Vendor Dashboard Set\n(forthcoming)",
+              "group": "Vendors",
+              "type": "folder",
+              "description": "Dashboards tailored for vendor-facing metrics and internal PGL tracking needs.",
+              "children": [
+                {
+                  "name": "Item Sales Dashboard",
+                  "group": "Vendors",
+                  "type": "dashboard",
+                  "description": "Tracks quantity and type of items sold by vendors at each market."
+                },
+                {
+                  "name": "PGL Personnel Dashboard",
+                  "group": "PGL",
+                  "type": "dashboard",
+                  "description": "Displays information about PGL staff assignments, hours, and roles per market day."
+                },
+                {
+                  "name": "All PGL Contracts Dashboard",
+                  "group": "PGL",
+                  "type": "dashboard",
+                  "description": "Aggregates and tracks all contracts PGL is involved in across different programs and funders."
+                },
+                {
+                  "name": "Inventory Dashboard",
+                  "group": "Vendors",
+                  "type": "dashboard",
+                  "description": "Monitors current inventory levels and supply chain status for vendor goods."
+                }
+              ]
+            }
+            
+          ]
+        }
+      ]
+    },
+    
+    {
+      "name": "Core Functionalities ",
+      "group": "PGL",
+      "type": "folder",
+      "description": "Other core functionalities for usage",
+      "children": [
+
+        {
+          "name": "Mobile App Interfaces ",
+          "group": "PGL",
+          "type": "feature",
+          "description": "for easy Vendor and Attendee information access",
+          "children": [
+            {
+              "name": "For vendors",
+              "group": "Vendors",
+              "type": "category",
+              "description": "Vendor-specific views and tools for mobile interaction.",
+              "children": [
+                {
+                  "name": "Vendor ID",
+                  "group": "Vendors",
+                  "type": "field",
+                  "description": "Unique identifier for each vendor used across forms and dashboards."
+                },
+                {
+                  "name": "Website link for quick access to forms and dashboards",
+                  "group": "Vendors",
+                  "type": "field",
+                  "description": "Direct link provided in the app to access required forms and performance dashboards."
+                }
+              ]
+            },
+            {
+              "name": "For attendees",
+              "group": "PGL",
+              "type": "category",
+              "description": "Personalized mobile views for attendees and benefit tracking.",
+              "children": [
+                {
+                  "name": "Neighbor ID",
+                  "group": "PGL",
+                  "type": "field",
+                  "description": "Unique family ID used to link benefit balances and transactions."
+                },
+                {
+                  "name": "Neighbor PIN",
+                  "group": "PGL",
+                  "type": "field",
+                  "description": "A secure PIN used for transaction authorization at the market."
+                },
+                {
+                  "name": "First and last name and DOB of all family members on the account",
+                  "group": "PGL",
+                  "type": "field",
+                  "description": "Personal details for identity verification and account-level tracking."
+                },
+                {
+                  "name": "CSA member or not",
+                  "group": "PGL",
+                  "type": "field",
+                  "description": "Indicates whether the attendee is currently enrolled in CSA distribution."
+                },
+                {
+                  "name": "Wallace member or not",
+                  "group": "PGL",
+                  "type": "field",
+                  "description": "Flags if the attendee is eligible for Wallace Bucks auto-load benefits."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Notifications",
+          "group": "PGL",
+          "type": "feature",
+          "description": "Supports communication alerts and reminders for users of the system.",
+          "children": [
+            
+                {
+                  "name": "PGL",
+                  "group": "PGL",
+                  "type": "recipient",
+                  "description": "Notifications targeted at market managers and administrative staff.",
+                  "children": [
+                    {
+                      "name": "Three or more consecutive market attendance days below monthly average",
+                      "type": "notification",
+                      "description": "Email"
+                    },
+                    {
+                      "name": "Three or more consecutive market sales days below monthly average (any payment type)",
+                      "type": "notification",
+                      "description": "Email"
+                    },
+                    {
+                      "name": "Vendor has ≥1 overdue document (starts 1 week post due, repeats every 3 days)",
+                      "type": "notification",
+                      "description": "Email"
+                    },
+                    {
+                      "name": "Vendor absent from market >1 day",
+                      "type": "notification",
+                      "description": "Email"
+                    },
+                    {
+                      "name": "Low expected attendance (<50% vendors) for next market",
+                      "type": "notification",
+                      "description": "Email"
+                    },
+                    {
+                      "name": "Rental equipment returned damaged or not returned",
+                      "type": "notification",
+                      "description": "Email"
+                    },
+                    {
+                      "name": "System maintenance down / in progress",
+                      "type": "notification",
+                      "description": "Email"
+                    },
+                    {
+                      "name": "CSA drop (if any enrolled CSA member misses 2 consecutive CSA pick-ups)",
+                      "type": "notification",
+                      "description": "Email"
+                    },
+                    {
+                      "name": "New vendor application submitted through vendor request form",
+                      "type": "notification",
+                      "description": "Email"
+                    },
+                    {
+                      "name": "New vendor documents uploaded through vendor document upload form",
+                      "type": "notification",
+                      "description": "Email"
+                    },
+                    {
+                      "name": "If vendor has any missing forms from the document upload form (beginning 3 days after due)",
+                      "type": "notification",
+                      "description": "Email"
+                    },
+                    {
+                      "name": "CSA cap reached",
+                      "type": "notification",
+                      "description": "Email and portal notification"
+                    }
+                  ]
+                },
+                {
+                  "name": "Vendor",
+                  "group": "Vendors",
+                  "type": "recipient",
+                  "description": "Notifications related to participation, transactions, or schedules.",
+                  "children": [
+                    {
+                      "name": "Vendor has ≥1 overdue document (starts 1 week post due, repeats every 3 days)",
+                      "type": "notification",
+                      "description": "Email"
+                    },
+                    
+                    {
+                      "name": "Rental equipment returned damaged or not returned",
+                      "type": "notification",
+                      "description": "Email"
+                    },
+                    {
+                      "name": "If vendor has any missing forms from the document upload form (beginning 3 days after due)",
+                      "type": "notification",
+                      "description": "Email"
+                    }
+                  ]
+                },
+                {
+                  "name": "Funder",
+                  "group": "Funders",
+                  "type": "recipient",
+                  "description": "Updates on reports, invoices, or funding milestones.",
+                  "children": [
+                    {
+                      "name": "Three or more consecutive market attendance days below monthly average",
+                      "type": "notification",
+                      "description": "Email"
+                    },
+                    {
+                      "name": "Three or more consecutive market sales days below monthly average (any payment type)",
+                      "type": "notification",
+                      "description": "Email"
+                    },
+                    {
+                      "name": "Vendor has ≥1 overdue document (starts 1 week post due, repeats every 3 days)",
+                      "type": "notification",
+                      "description": "Email"
+                    },
+                    {
+                      "name": "Low expected attendance (<50% vendors) for next market",
+                      "type": "notification",
+                      "description": "Email"
+                    },
+                    {
+                      "name": "System maintenance down / in progress",
+                      "type": "notification",
+                      "description": "Email"
+                    }
+                  ]
+                
+              
+            }
+          ]
+        },            
+        {
+          "name": "Encryption",
+          "group": "PGL",
+          "type": "feature",
+          "description": "All sensitive data is encrypted both in transit and at rest to ensure privacy and regulatory compliance."
+        },
+        {
+          "name": "Access restriction",
+          "group": "PGL",
+          "type": "feature",
+          "description": "Granular access control ensures only authorized users can view or edit specific information."
+        },
+        {
+          "name": "Real-time updates",
+          "group": "PGL",
+          "type": "feature",
+          "description": "Changes in forms, dashboards, or mobile entries are reflected in real-time across the system."
+        },
+        {
+          "name": "Back-end time stamps",
+          "group": "PGL",
+          "type": "feature",
+          "description": "Every submission or update is automatically time-stamped for auditability."
+        },
+        {
+          "name": "Document uploading",
+          "group": "PGL",
+          "type": "feature",
+          "description": "Use this for uploading vendor registration related documents in the vendor market , vendor request and the document uploading form"
+        },
+        {
+          "name": "ID tracking",
+          "group": "PGL",
+          "type": "feature",
+          "description": "Uses unique IDs (Vendor ID, Neighbor ID) to link all actions, submissions, and benefits to correct stakeholders."
+        }
+      ]
+    },
+    {
+      "name": "The PMDS Support",
+      "group": "PGL",
+      "type": "folder",
+      "description": "Resources to assist users in understanding, navigating, and using PMDS effectively.",
+      "children": [
+        
+        {
+          "name": "User Guide",
+          "group": "PGL",
+          "type": "link",
+          "description": "Comprehensive written manual to assist users in understanding and using PMDS.",
+          "url": "https://qrfy.io/p/w0zNY5p27r?required_password=true"
+        },
+        {
+          "name": "End of Market",
+          "type": "dashboard",
+          "url": "https://ucincinnati.qualtrics.com/jfe/form/SV_7QKayb7IDVgMo8m",
+          "description": "End of market form for closure documentation."
+        },
+        {
+          "name": "End of Season",
+          "type": "dashboard",
+          "url": "https://ucincinnati.qualtrics.com/jfe/form/SV_0VWDyR5qbwa9EfI",
+          "description": "End of season report submission form."
+        }
+        
+      ]
+    }
+    
+    
+    
+    
+    
+  ]
+}

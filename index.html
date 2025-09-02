@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <meta charset="UTF-8" />
+    <title>People's Market Dashboard System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="arf.css" />
+    <script src="d3.v3.min.js"></script>
+
+    <!-- Inline Styling -->
+    <style>
+      html {
+    zoom: 67%; /* Works in Chrome, Edge */
+  }
+
+  @media not all and (min-resolution: 0.001dpcm) {
+    @supports (-moz-appearance: none) {
+      body {
+        transform: scale(0.67);
+        transform-origin: top left;
+        width: 149.25%; /* 100 / 0.67 */
+      }
+    }
+  }
+      body {
+        font-family: 'Georgia', serif;
+        background-color: #f5f7fa;
+        color: #2c3e50;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+ 
+
+
+      #header {
+        background-color: white;
+        color: #1a237e;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid #ccc;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+      }
+      #body {
+  overflow: auto;
+  position: relative;
+}
+
+      .left-logo img {
+        height: 60px;
+        max-width: 300px;
+      }
+
+      #tooltip {
+  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid #00e676;
+  border-radius: 12px;
+  color: #e0f2f1;
+  font-size: 14px;
+  box-shadow: 0 0 15px rgba(0, 230, 118, 0.4);
+}
+
+.node:hover circle {
+  stroke: #00e676;
+  stroke-width: 3px;
+  filter: drop-shadow(0 0 5px #00e676);
+}
+
+.info-button circle {
+  fill: #00e676;
+  stroke: #00c853;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { r: 6; opacity: 1; }
+  50% { r: 8; opacity: 0.6; }
+  100% { r: 6; opacity: 1; }
+}
+
+hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(to right, #00e676, #1de9b6, #00e676);
+  box-shadow: 0 0 6px rgba(0, 230, 118, 0.5);
+}
+
+
+      .right-logo {
+        flex-shrink: 0;
+      }
+
+      .right-logo img {
+        height: 100px;
+        width: auto;
+        max-width: none;
+      }
+
+      
+
+      .header-title {
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: #002ee6;
+  text-shadow: 0 0 8px rgba(0, 8, 230, 0.5);
+  text-transform: uppercase;
+}
+
+
+
+      #spia-container {
+        position: fixed;
+        bottom: 20px;
+        left: 10px;
+        text-align: center;
+        z-index: 1000;
+        font-size: 12px;
+        color: #444;
+        font-style: italic;
+      }
+
+      #particle-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+
+      #spia-container img {
+        width: 150px;
+        opacity: 0.9;
+        display: block;
+        margin: 0 auto;
+      }
+
+      #body {
+        padding: 10px;
+        max-width: 4000px;
+        margin: auto;
+      
+      }
+
+      .legend {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #e3eaf5;
+        border-left: 5px solid #3949ab;
+        font-size: 16px;
+        line-height: 1.6;
+        max-width: 1100px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 40px;
+      }
+
+      .color-legend {
+        font-size: 14px;
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        background-color: transparent;
+        position: relative;
+        z-index: 0;
+        padding: 5px 0;
+        border-top: 1px solid #ccc;
+      }
+
+      .color-legend span {
+        margin-right: 20px;
+        font-weight: bold;
+      }
+
+      hr {
+        border: none;
+        height: 2px;
+        background-color: #3949ab;
+        margin: 20px 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    
+
+    
+    
+
+    <!-- Header with Logos -->
+    <div id="header">
+      <div class="header-logo left-logo">
+        <img src="spia_new_logo.png" alt="Left Logo" />
+      </div>
+      <div class="header-title">
+        The People's Market Dashboard System
+      </div>
+      <div class="header-logo right-logo">
+        <img src="xyz.png" alt="Right Logo" />
+      </div>
+    </div>
+    
+
+
+    <div id="instruction-container" style="
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 30px;
+  background-color: #f0f4f8;
+  border-bottom: 2px solid #ccc;
+  gap: 40px;
+">
+  <div id="instruction-text" style="
+    font-size: 22px;
+    line-height: 1.6;
+    color: #263238;
+    flex: 1;
+  ">
+    This diagram explains the different components of the People's Market Dashboard System, along with their purposes, and who uses them. Click the corresponding hyperlinks to access views of each system component. Use the mouse to hover over the text for more information.
+  </div>
+
+  <div id="lang-selector" style="
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 250px;
+  gap: 16px;
+  text-align: right;
+">
+  <div>
+    <label for="lang-toggle" style="
+      font-size: 18px;
+      color: #1a237e;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 8px;
+    ">Narration Language:</label>
+
+    <select id="lang-toggle" onchange="setLanguage(this.value)" style="
+      font-size: 17px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 1.5px solid #3949ab;
+      background-color: #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      width: 220px;
+    ">
+      <option value="en-US" selected>English</option>
+      <option value="es-ES">Español</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="voice-toggle" style="
+      font-size: 18px;
+      color: #1a237e;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 8px;
+    ">Voice Narration:</label>
+
+    <label style="
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      color: #1a237e;
+    ">
+      <input type="checkbox" id="toggleNarration" onchange="voiceNarrationEnabled = this.checked;">
+      <span>Enable Narration</span>
+    </label>
+  </div>
+</div>
+
+</div>
+
+    
+
+  
+</div>
+
+
+
+    
+
+    <!-- D3 Visualization Area -->
+    <div id="body">
+      <!-- D3 will populate this area -->
+      <!--svg width="1000" height="600"></svg-->
+    </div>
+
+    
+
+   
+
+    <!-- Tooltip for D3 -->
+    <div id="tooltip" style="
+      position: absolute;
+      max-width: 300px;
+      padding: 12px 16px;
+      font-size: 15px;
+      background: #ffffff;
+      border: 1.5px solid #1a237e;
+      border-radius: 8px;
+      pointer-events: none;
+      color: #1a237e;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      line-height: 1.5;
+      display: none;
+      z-index: 9999;
+    "></div>
+
+<div style="text-align:center; margin: 40px auto; max-width: 800px;">
+  
+<canvas id="particle-bg"></canvas>
+
+    
+
+
+    <!-- D3 Script -->
+    <script src="arf.js"></script>
+
+    <script>
+      const analyticsData = JSON.parse(localStorage.getItem("pmds_analytics")) || [];
+    
+      function trackEvent(action, label) {
+        const entry = {
+          action,
+          label,
+          time: new Date().toLocaleString()
+        };
+        analyticsData.push(entry);
+        localStorage.setItem("pmds_analytics", JSON.stringify(analyticsData));
+        console.log("Tracked:", entry);
+      }
+    
+      // Optional: View in console
+      window.viewAnalytics = () => {
+        console.table(JSON.parse(localStorage.getItem("pmds_analytics")) || []);
+      };
+    
+      // Optional: Clear
+      window.clearAnalytics = () => {
+        localStorage.removeItem("pmds_analytics");
+        console.log("Analytics cleared.");
+      };
+    </script>
+
+<script>
+  function drawChart() {
+    const raw = JSON.parse(localStorage.getItem("pmds_analytics")) || [];
+    const counts = {};
+
+    raw.forEach(entry => {
+      const key = `${entry.action} - ${entry.label}`;
+      counts[key] = (counts[key] || 0) + 1;
+    });
+
+    const labels = Object.keys(counts);
+    const data = Object.values(counts);
+
+    const ctx = document.getElementById("analyticsChart").getContext("2d");
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [{
+          label: "Interactions",
+          data: data,
+          backgroundColor: "#00e676"
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  }
+
+  function exportCSV() {
+    const data = JSON.parse(localStorage.getItem("pmds_analytics")) || [];
+    let csv = "Action,Label,Time\n";
+    data.forEach(entry => {
+      csv += `${entry.action},${entry.label},"${entry.time}"\n`;
+    });
+
+    const blob = new Blob([csv], { type: "text/csv" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "pmds_analytics.csv";
+    link.click();
+  }
+
+   // Render chart on page load
+</script>
+
+    
+    
+  </body>
+</html>
