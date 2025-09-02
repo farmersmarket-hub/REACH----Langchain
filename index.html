@@ -188,18 +188,101 @@ hr {
         background-color: #3949ab;
         margin: 20px 0;
       }
+      /* ===== Login Screen Styling ===== */
+#login-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #1a237e, #3949ab, #5c6bc0);
+}
+
+.login-card {
+  background: #fff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.login-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #1a237e;
+  margin-bottom: 10px;
+}
+
+.login-subtitle {
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 25px;
+}
+
+.login-input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.login-input:focus {
+  border-color: #1a237e;
+  outline: none;
+  box-shadow: 0 0 6px rgba(26, 35, 126, 0.3);
+}
+
+.login-button {
+  width: 100%;
+  padding: 12px;
+  background: #1a237e;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-button:hover {
+  background: #0d185e;
+}
+
+.login-error {
+  color: #d32f2f;
+  font-size: 14px;
+  margin-top: 10px;
+  display: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
     </style>
   </head>
 
   <body>
     
 <!-- 🔑 Login Screen -->
-<div id="login-screen" style="text-align:center; margin-top:100px;">
-  <h2>Enter Password</h2>
-  <input type="password" id="password-input" placeholder="Password" />
-  <button onclick="checkPassword()">Submit</button>
-  <p id="error-msg" style="color:red; display:none;">Incorrect password.</p>
+
+<div id="login-screen">
+  <div class="login-card">
+    <h2 class="login-title">🔒 Secure Access</h2>
+    <p class="login-subtitle">Please enter your password to access the Dashboard</p>
+    <input type="password" id="password-input" placeholder="Enter password" class="login-input"/>
+    <button onclick="checkPassword()" class="login-button">Unlock</button>
+    <p id="error-msg" class="login-error">Incorrect password. Please try again.</p>
+  </div>
 </div>
+
 
 <!-- 🔒 Hidden container for dashboard -->
 <div id="diagram-container" style="display:none;">
