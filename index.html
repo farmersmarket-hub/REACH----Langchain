@@ -193,6 +193,16 @@ hr {
 
   <body>
     
+<!-- 🔑 Login Screen -->
+<div id="login-screen" style="text-align:center; margin-top:100px;">
+  <h2>Enter Password</h2>
+  <input type="password" id="password-input" placeholder="Password" />
+  <button onclick="checkPassword()">Submit</button>
+  <p id="error-msg" style="color:red; display:none;">Incorrect password.</p>
+</div>
+
+<!-- 🔒 Hidden container for dashboard -->
+<div id="diagram-container" style="display:none;">
 
     
     
@@ -331,7 +341,9 @@ hr {
 
 
     <!-- D3 Script -->
-    <script src="arf.js"></script>
+   
+
+    
 
     <script>
       const analyticsData = JSON.parse(localStorage.getItem("pmds_analytics")) || [];
@@ -409,6 +421,38 @@ hr {
    // Render chart on page load
 </script>
 
+    
+    </div>  
+    <script>
+      function checkPassword() {
+        const input = document.getElementById("password-input").value;
+        if (input === "PMDS2025!") { // Change password here
+          document.getElementById("login-screen").style.display = "none";
+          document.getElementById("diagram-container").style.display = "block";
+        } else {
+          document.getElementById("error-msg").style.display = "block";
+        }
+      }
+    </script>
+    <script>
+      function checkPassword() {
+        const input = document.getElementById("password-input").value;
+        if (input === "PMDS2025!") { // Change password here
+          document.getElementById("login-screen").style.display = "none";
+          document.getElementById("diagram-container").style.display = "block";
+    
+          // Load arf.js only after password is correct
+          const script = document.createElement("script");
+          script.src = "arf.js";
+          script.onload = () => {
+            console.log("LangChain diagram loaded!");
+          };
+          document.body.appendChild(script);
+        } else {
+          document.getElementById("error-msg").style.display = "block";
+        }
+      }
+    </script>
     
     
   </body>
